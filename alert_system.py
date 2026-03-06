@@ -4,16 +4,20 @@ import os
 import threading
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # ==================================================
 # PROBLEM 2: EMAIL CONFIGURATION
 # ==================================================
-# Replace these with your actual credentials for the demo
-EMAIL_SENDER = "shemushemeer47@gmail.com"
-EMAIL_PASSWORD = "vnwa wffj rexd ujov"
-EMAIL_RECEIVER = "ms.shameer47@gmail.com"
-SMTP_SERVER = "smtp.gmail.com"
-SMTP_PORT = 587
+# Credentials loaded from .env securely
+EMAIL_SENDER = os.getenv("EMAIL_SENDER")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+EMAIL_RECEIVER = os.getenv("EMAIL_RECEIVER")
+SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
 
 # Global list to store alert messages
 alert_history = []
@@ -24,8 +28,8 @@ def send_email_alert(alert_type, confidence):
     """
     def _send():
         # Validation check
-        if EMAIL_SENDER == "yourgmail@gmail.com" or EMAIL_PASSWORD == "16_char_gmail_app_password":
-            print("❌ Email credentials missing: Please update alert_system.py with your Gmail credentials.")
+        if not EMAIL_SENDER or not EMAIL_PASSWORD or EMAIL_SENDER == "yourgmail@gmail.com":
+            print("❌ Email credentials missing: Please update your .env file with your Gmail credentials.")
             return
 
         try:
@@ -73,13 +77,14 @@ def play_alarm():
         try:
             import winsound
             if os.path.exists("alarm.wav"):
-                # SND_ASYNC plays in background, SND_FILENAME says it's a file
-                winsound.PlaySound("alarm.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
                 print("🔊 Alarm triggered (wav file)!")
-            else:
-                # Fallback: Loop beeps several times to make it noticeable
-                print("🔊 Alarm triggered (Beep fallback - wav missing)!")
+                # Play synchronously multiple times in this background thread
                 for _ in range(3):
+                    winsound.PlaySound("alarm.wav", winsound.SND_FILENAME)
+            else:
+                # Fallback: Loop beeps to last ~3.6 seconds
+                print("🔊 Alarm triggered (Beep fallback - wav missing)!")
+                for _ in range(6):
                     winsound.Beep(1000, 500)  # 1kHz for 0.5s
                     time.sleep(0.1)
         except Exception as e:

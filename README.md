@@ -25,6 +25,16 @@ AI_Safety_Guardian/
    ```bash
    pip install -r requirements.txt
    ```
+3. **Environment Setup**: 
+   Since this project uses email monitoring, you must set your credentials securely.
+   - Rename `.env.example` to `.env`.
+   - Open `.env` and configure your credentials:
+     ```env
+     EMAIL_SENDER=yourgmail@gmail.com
+     EMAIL_PASSWORD="your_16_char_app_password"
+     EMAIL_RECEIVER=receiver_email@gmail.com
+     ```
+   *(Note: Never commit your `.env` file to GitHub! The provided `.gitignore` file already prevents this).*
 
 ## Usage
 
