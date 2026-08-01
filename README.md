@@ -112,6 +112,12 @@ Open `http://localhost:8501` in your web browser.
 
 ---
 
+## 👥 Authors & Contributors
+
+- **Mohammed Shameer M** — [github.com/muhammedshemeer](https://github.com/muhammedshemeer)
+- **Lekshmi Maniyan** — [github.com/lekshmiparu23-ai](https://github.com/lekshmiparu23-ai)
+- 
+---
 ## 📄 License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
