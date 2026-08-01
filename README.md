@@ -116,7 +116,6 @@ Open `http://localhost:8501` in your web browser.
 
 - **Mohammed Shameer M** — [github.com/muhammedshemeer](https://github.com/muhammedshemeer)
 - **Lekshmi Maniyan** — [github.com/lekshmiparu23-ai](https://github.com/lekshmiparu23-ai)
-- 
 ---
 ## 📄 License
 
